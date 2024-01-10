@@ -2,7 +2,10 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+}
 
+html {
+    background-color: #ff8f00;
 }
 
 .button-container {
@@ -10,26 +13,37 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 400px;
-    width: 300px;
+    height: 580px;
+    width: 310px;
     border: solid black 2px;
-}
-
-.screen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100px;
-    width: 300px;
-    border: solid black 2px;
+    border-radius: 20px;
+    background-color: black;
+    padding-bottom: 15px;
 }
 
 .screen-container {
     border: solid 2px black;
-    height: 60px;
+    height: 100px;
     width: 252px;
-    text-align: end;
+    background-color: rgb(59, 59, 59);
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+    padding-right: 10px;
+    padding-bottom: 5px;
+}
+
+.result {
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.operation {
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 button {
@@ -49,4 +63,39 @@ button.dot {
     margin-right: 5px;
 }
 
+button.number {
+    background-color: rgb(110, 110, 110);
+    color: white;
+    border: none;
+}
 
+button.operator, .equals{
+    background-color: rgb(255, 179, 39);
+    border: none;
+    color: white;
+}
+
+.clear, .delete {
+    background-color: rgb(206, 205, 205);
+    border: none;
+    color: white;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: underline;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 32px;
+}

@@ -39,18 +39,7 @@ btnClear.addEventListener('click', clearDisplay);
 
 btnEqual.addEventListener('click', operate);
 
-/*
-btnDot.addEventListener('click', (event) => {
-    let dot = event.target.id;
-    displayContent(dot);
-});
-
-btnDelete.addEventListener('click', (event) => {
-    operator = event.target.id;
-    displayContent(operator);
-});
-*/
-
+btnDelete.addEventListener('click', deleteLast);
 
 function displayContent(btnClicked)
 {   
@@ -63,7 +52,7 @@ function displayContent(btnClicked)
 
 function getOperator(btnClicked) 
 {
-    firstNumber = parseInt(result.textContent);
+    firstNumber = parseFloat(result.textContent);
     currentOperator = btnClicked;
     displayOperationScreen();
     resetResult = true;
@@ -97,9 +86,18 @@ function clearDisplay()
     currentOperator = '';
 }
 
+function deleteLast() 
+{
+    let currentDisplay = result.textContent;
+    let length = currentDisplay.length - 1;
+    let newDisplay = currentDisplay.substring(0, length);
+    result.textContent = newDisplay;
+}
+
 function operate() 
 {
-    secondNumber = parseInt(result.textContent);
+    secondNumber = parseFloat(result.textContent);
+
     switch(currentOperator) 
     {
         case "+":
