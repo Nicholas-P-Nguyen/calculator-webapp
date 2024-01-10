@@ -1,162 +1,157 @@
 // global variables to store the number
-let number;
+let firstNumber = 0;
+let secondNumber = 0; 
+let currentOperator = '';
+let solution = 0;
+let resetResult = false;
+
+// Reference to all number buttons 
+const btnNumber = document.querySelectorAll('.number');
+
+// Reference to all the operator buttons 
+const btnOperator = document.querySelectorAll('.operator');
 
 // Reference to nodes in the DOM 
-const btnZero = document.querySelector('.zero');
 const btnDot = document.querySelector('.dot');
-const btnEqual = document.querySelector('.equal');
-const btnOne = document.querySelector('.one');
-const btnTwo = document.querySelector('.two');
-const btnThree = document.querySelector('.three');
-const btnPlus = document.querySelector('.plus');
-const btnFour = document.querySelector('.four');
-const btnFive = document.querySelector('.five');
-const btnSix = document.querySelector('.six');
-const btnMinus = document.querySelector('.minus');
-const btnSeven = document.querySelector('.seven');
-const btnEight = document.querySelector('.eight');
-const btnNine = document.querySelector('.nine');
-const btnMultiply = document.querySelector('.multiply');
+const btnEqual = document.querySelector('.equals');
 const btnClear = document.querySelector('.clear');
 const btnDelete = document.querySelector('.delete');
-const btnRemainder = document.querySelector('.remainder');
-const btnDivide = document.querySelector('.divide');
-
 const operation = document.querySelector('.operation');
 const result = document.querySelector('.result');
 
-// numbers
-btnZero.addEventListener('click', (event) => {
-    number = event.target.id;
-    displayContent(number);
+// Adding event listener for the number buttons 
+btnNumber.forEach(button => {
+    button.addEventListener('click', (event) => {
+        let number = event.target.textContent; 
+        displayContent(number);
+    });
 });
 
-btnOne.addEventListener('click', (event) => {
-    number = event.target.id;
-    displayContent(number);
+// Adding event listener for the operator buttons 
+btnOperator.forEach(button => {
+    button.addEventListener('click', (event) => {
+        let operator = event.target.textContent;
+        getOperator(operator);
+    });
 });
-btnTwo.addEventListener('click', (event) => {
-    number = event.target.id;
-    displayContent(number);
-});
-btnThree.addEventListener('click', (event) => {
-    number = event.target.id;
-    displayContent(number);
-});
-btnFour.addEventListener('click', (event) => {
-    number = event.target.id;
-    displayContent(number);
-});
-btnFive.addEventListener('click', (event) => {
-    number = event.target.id;
-    displayContent(number);
-});
-btnSix.addEventListener('click', (event) => {
-    number = event.target.id;
-    displayContent(number);
-});
-btnSeven.addEventListener('click', (event) => {
-    number = event.target.id;
-    displayContent(number);
-});
-btnEight.addEventListener('click', (event) => {
-    number = event.target.id;
-    displayContent(number);
-});
-btnNine.addEventListener('click', (event) => {
-    number = event.target.id;
-    displayContent(number);
-});
-// operations 
-btnDot.addEventListener('click', (event) => {
-    operator = event.target.id;
-    displayContent(operator);
-});
-btnPlus.addEventListener('click', (event) => {
-    operator = event.target.id;
-    displayContent(operator);
-});
-btnMinus.addEventListener('click', (event) => {
-    operator = event.target.id;
-    displayContent(operator);
-});
-btnMultiply.addEventListener('click', (event) => {
-    operator = event.target.id;
-    displayContent(operator);
-});
-btnDivide.addEventListener('click', (event) => {
-    operator = event.target.id;
-    displayContent(operator);
-});
-btnRemainder.addEventListener('click', (event) => {
-    operator = event.target.id;
-    displayContent(operator);
-});
+
+btnClear.addEventListener('click', clearDisplay);
+
+btnEqual.addEventListener('click', operate);
 
 /*
-btnEqual.addEventListener('click', (event) => {
-    operator = event.target.id;
-    displayContent(operator);
+btnDot.addEventListener('click', (event) => {
+    let dot = event.target.id;
+    displayContent(dot);
 });
-btnClear.addEventListener('click', (event) => {
-    operator = event.target.id;
-    displayContent(operator);
-});
+
 btnDelete.addEventListener('click', (event) => {
     operator = event.target.id;
     displayContent(operator);
 });
 */
 
+
 function displayContent(btnClicked)
+{   
+    if (resetResult === true)
+    {
+        resetResultScreen();
+    }
+    result.textContent += btnClicked;
+}
+
+function getOperator(btnClicked) 
 {
-    operation.innerHTML += btnClicked;
+    firstNumber = parseInt(result.textContent);
+    currentOperator = btnClicked;
+    displayOperationScreen();
+    resetResult = true;
+}
+
+function displayOperationScreen() 
+{
+    operation.textContent = `${firstNumber} ${currentOperator}`
+}
+
+function resetResultScreen()
+{
+    result.textContent = '';
+    resetResult = false;
+}
+
+function displaySolution() 
+{
+    result.textContent = solution;
+    operation.textContent = `${firstNumber} ${currentOperator} ${secondNumber}`;
+    firstNumber = solution;
+    resetResult = true; 
+}
+
+function clearDisplay()
+{
+    operation.textContent = '';
+    result.textContent = '';
+    firstNumber = 0;
+    secondNumber = 0;
+    currentOperator = '';
+}
+
+function operate() 
+{
+    secondNumber = parseInt(result.textContent);
+    switch(currentOperator) 
+    {
+        case "+":
+            add(firstNumber, secondNumber);
+            break;
+        case "-":
+            subtract(firstNumber, secondNumber);
+            break;
+        case "x":
+            multiply(firstNumber, secondNumber);
+            break;
+        case "/":
+            divide(firstNumber, secondNumber);
+            break;
+        case "%":
+            remainder(firstNumber, secondNumber);
+            break;
+    }
+    displaySolution();
 }
 
 function add(x, y) 
 {
-    return x + y;
+    solution = x + y;
+    
+    return solution;
 }
 
 function subtract(x, y)
 {
-    return x - y;
+    solution = x - y;
+   
+    return solution;
 }
 
 function multiply(x, y)
 {
-    return x * y;
+    solution = x * y;
+  
+    return solution;
 }
 
 function divide(x, y)
 {
-    return x / y;
+    solution = x / y;
+
+    return solution;
 }
 
 function remainder(x, y) 
 {
-    return x % y;
-}
+    solution = x % y;
 
-function operate(x, y, operator) 
-{
-    switch(operator) 
-    {
-        case "+":
-            add(x, y);
-            break;
-        case "-":
-            subtract(x, y);
-            break;
-        case "x":
-            multiply(x, y);
-            break;
-        case "/":
-            divide(x, y);
-            break;
-        case "%":
-            remainder(x, y);
-            break;
-    }
-        
+    return solution; 
 }
